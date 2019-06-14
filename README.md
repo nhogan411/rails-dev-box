@@ -35,11 +35,11 @@ At this point I had issues getting my app up and running so I had to perform the
 
 1. Edit your Gemfile to make sure you're running the correct version of Rails and Puma
 
-Find `gem 'rails', '~> 5.2.3'` and replace it with `gem 'rails', '5.2.1'`
+    Find `gem 'rails', '~> 5.2.3'` and replace it with `gem 'rails', '5.2.1'`
 
-Find `gem 'puma', '~> 3.11' and replace it with `gem 'puma', '3.12'`
+    Find `gem 'puma', '~> 3.11'` and replace it with `gem 'puma', '3.12'`
 
-Save your changes
+    Save your changes
 
 1. If you're going to use Postgres add the following to your Gemfile
     
