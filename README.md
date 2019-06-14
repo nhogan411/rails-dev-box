@@ -1,3 +1,90 @@
+# For New Projects
+
+This project is using the [rails-dev-box](https://github.com/rails/rails-dev-box.git) to get a dev environment setup for a rails app.
+
+## First Time Rails Dev Box users
+1. Clone this project into your code folder:
+`cd YOUR CODE FOLDER`
+`git clone https://github.com/rails/rails-dev-box.git`
+
+1. Move into the new project folder:
+`cd rails-dev-box`
+
+1. Get vagrant up and running
+`vagrant up`
+
+1. SSH into the vagrant box
+`vagrant ssh`
+
+## Creating An App
+Now you can create multiple rails apps, each will create a subfolder in the rails-dev-box project. 
+
+1. Make sure vagrant is up and you have ssh'd into the vagrant box
+`vagrant up && vagrant ssh`
+
+1. Move to the vagrant folder
+`cd /vagrant`
+
+1. Create an app
+`rails new APP_NAME`
+
+1. Move into your newly created app
+`cd APP_NAME`
+
+At this point I had issues getting my app up and running so I had to perform the following steps:
+
+1. Edit your Gemfile to make sure you're running the correct version of Rails and Puma
+
+Find `gem 'rails', '~> 5.2.3'` and replace it with `gem 'rails', '5.2.1'`
+
+Find `gem 'puma', '~> 3.11' and replace it with `gem 'puma', '3.12'`
+
+Save your changes
+
+1. If you're going to use Postgres add the following to your Gemfile
+    
+    ```
+    # Use Postgres
+    gem 'pg'
+    ```
+
+1. Edit the config/database.yml file by adding the following
+    
+    ```
+    # Using Postgres, not SQLlite
+    default: &default
+      adapter: postgresql
+      pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+      timeout: 5000
+
+    development:
+      <<: *default
+      database: db/APP_NAME_dev
+
+    # Warning: The database defined as "test" will be erased and
+    # re-generated from your development database when you run "rake".
+    # Do not set this db to the same as development or production.
+    test:
+      <<: *default
+      database: db/APP_NAME_test
+
+    production:
+      <<: *default
+      database: db/APP_NAME_prod
+    ```
+
+1. In the console run bundle
+`bundle`
+
+1. Create your new databases
+`rake db:create:all`
+
+Now you can run your rails app
+`rails s` OR `rails c`
+
+-----------------------------------------------------
+
+
 # A Virtual Machine for Ruby on Rails Core Development
 
 ## Introduction
